@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Shelby Protocol Explorer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Inter, sans-serif;
+}
+
+body{
+background:linear-gradient(270deg,#020617,#0f172a,#020617);
+background-size:400% 400%;
+animation:bgmove 15s ease infinite;
+color:white;
+overflow-x:hidden;
+}
+
+@keyframes bgmove{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+
+.container{
+width:90%;
+max-width:1200px;
+margin:auto;
+}
+
+.hero{
+height:90vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
+
+.hero h1{
+font-family:Orbitron;
+font-size:56px;
+margin-bottom:20px;
+}
+
+.hero p{
+max-width:600px;
+opacity:0.8;
+margin-bottom:40px;
+}
+
+.btn{
+padding:14px 28px;
+border-radius:12px;
+border:1px solid #22d3ee;
+background:transparent;
+color:white;
+cursor:pointer;
+margin:10px;
+transition:0.3s;
+font-size:16px;
+}
+
+.btn:hover{
+background:#22d3ee;
+color:black;
+box-shadow:0 0 15px #22d3ee,0 0 30px #22d3ee;
+transform:translateY(-3px);
+}
+
+.section{
+padding:80px 0;
+text-align:center;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+margin-top:40px;
+}
+
+.cardbtn{
+padding:20px;
+border-radius:14px;
+border:1px solid rgba(255,255,255,0.2);
+cursor:pointer;
+transition:0.3s;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(8px);
+}
+
+.cardbtn:hover{
+border-color:#a855f7;
+box-shadow:0 0 15px #a855f7;
+transform:translateY(-5px);
+}
+
+.cardbtn h3{
+margin-bottom:10px;
+}
+
+.modal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+display:flex;
+justify-content:center;
+align-items:center;
+opacity:0;
+pointer-events:none;
+transition:0.3s;
+}
+
+.modal.active{
+opacity:1;
+pointer-events:auto;
+}
+
+.modal-content{
+background:#020617;
+padding:40px;
+border-radius:16px;
+max-width:600px;
+border:1px solid rgba(255,255,255,0.2);
+box-shadow:0 0 30px rgba(0,255,255,0.2);
+animation:fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn{
+from{transform:translateY(20px);opacity:0}
+to{transform:translateY(0);opacity:1}
+}
+
+.close{
+margin-top:20px;
+cursor:pointer;
+padding:10px 20px;
+border:none;
+background:#22d3ee;
+border-radius:8px;
+color:black;
+}
+
+.footer{
+padding:40px;
+text-align:center;
+opacity:0.6;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<section class="hero">
+
+<h1>Shelby Protocol</h1>
+
+<p>
+Decentralized hot storage infrastructure for high performance data access, designed for streaming, AI workloads and large scale analytics.
+</p>
+
+<div>
+
+<button class="btn" onclick="scrollToSection('protocol')">Explore Protocol</button>
+<button class="btn" onclick="scrollToSection('tools')">Developer Tools</button>
+<button class="btn" onclick="openFaucet()">ShelbyUSD Faucet</button>
+
+</div>
+
+</section>
+
+
+<section id="protocol" class="section">
+
+<h2>Protocol Explorer</h2>
+
+<div class="grid">
+
+<div class="cardbtn" onclick="openModal('shelby')">
+<h3>What is Shelby</h3>
+<p>Protocol overview</p>
+</div>
+
+<div class="cardbtn" onclick="openModal('architecture')">
+<h3>Architecture</h3>
+<p>System components</p>
+</div>
+
+<div class="cardbtn" onclick="openModal('features')">
+<h3>Key Features</h3>
+<p>Capabilities</p>
+</div>
+
+<div class="cardbtn" onclick="openModal('aptos')">
+<h3>Why Aptos</h3>
+<p>Coordination layer</p>
+</div>
+
+<div class="cardbtn" onclick="openModal('incentives')">
+<h3>Incentive Model</h3>
+<p>Provider rewards</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="tools" class="section">
+
+<h2>Developer Tools</h2>
+
+<div class="grid">
+
+<div class="cardbtn" onclick="openModal('cli')">
+<h3>CLI</h3>
+<p>Command line interface</p>
+</div>
+
+<div class="cardbtn" onclick="openModal('sdk')">
+<h3>Typescript SDK</h3>
+<p>Developer library</p>
+</div>
+
+<div class="cardbtn" onclick="openModal('rpc')">
+<h3>RPC APIs</h3>
+<p>Network endpoints</p>
+</div>
+
+<div class="cardbtn" onclick="openModal('providers')">
+<h3>Storage Providers</h3>
+<p>Network nodes</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<h2>ShelbyUSD Faucet</h2>
+
+<p style="margin-top:10px;opacity:0.8">
+Request ShelbyUSD tokens to interact with Shelby test network APIs.
+</p>
+
+<button class="btn" style="margin-top:25px" onclick="openFaucet()">
+Request Test Tokens
+</button>
+
+</section>
+
+
+<section class="section">
+
+<h2>Network Overview</h2>
+
+<div class="grid">
+
+<div class="cardbtn">
+<h3>Network</h3>
+<p>Shelbynet Test Network</p>
+</div>
+
+<div class="cardbtn">
+<h3>Storage Capacity</h3>
+<p>~10 TiB distributed storage</p>
+</div>
+
+<div class="cardbtn">
+<h3>Storage Providers</h3>
+<p>Decentralized serving nodes</p>
+</div>
+
+<div class="cardbtn">
+<h3>Coordination Layer</h3>
+<p>Aptos blockchain</p>
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
+<div id="modal" class="modal">
+
+<div class="modal-content">
+
+<h2 id="modalTitle"></h2>
+
+<p id="modalText" style="margin-top:20px;line-height:1.6"></p>
+
+<button class="close" onclick="closeModal()">Close</button>
+
+</div>
+
+</div>
+
+
+<div class="footer">
+Shelby Protocol Explorer
+</div>
+
+
+<script>
+
+const content={
+
+shelby:{
+title:"What is Shelby",
+text:"Shelby is a decentralized blob storage protocol optimized for high performance read workloads. It enables rapid retrieval of large datasets through distributed storage providers coordinated by blockchain infrastructure."
+},
+
+architecture:{
+title:"Architecture",
+text:"Shelby consists of Aptos smart contracts coordinating storage commitments, storage providers hosting blob data, RPC nodes processing read and write requests, erasure coding for redundancy, and auditing systems verifying provider integrity."
+},
+
+features:{
+title:"Key Features",
+text:"High performance read optimized storage. Distributed storage providers. High bandwidth serving infrastructure. Erasure coded redundancy. Cryptographic verification. Scalable decentralized storage economics."
+},
+
+aptos:{
+title:"Why Aptos",
+text:"Shelby uses the Aptos blockchain as the coordination layer because it provides high throughput execution, low latency finality, and scalable smart contracts for protocol coordination."
+},
+
+incentives:{
+title:"Incentive Model",
+text:"Shelby implements a paid read mechanism where storage providers earn rewards when serving data efficiently. This creates incentives for high availability and fast response times."
+},
+
+cli:{
+title:"CLI",
+text:"The command line interface allows developers to upload, retrieve, and manage blobs from the Shelby decentralized storage network."
+},
+
+sdk:{
+title:"Typescript SDK",
+text:"The SDK allows developers to integrate Shelby decentralized storage into web applications using a simple developer library."
+},
+
+rpc:{
+title:"RPC APIs",
+text:"RPC endpoints allow applications to interact with Shelby network services to read and write data."
+},
+
+providers:{
+title:"Storage Providers",
+text:"Storage providers are decentralized nodes responsible for storing blob data and serving it to users when requested."
+}
+
+};
+
+function openModal(key){
+
+document.getElementById("modalTitle").innerText=content[key].title;
+document.getElementById("modalText").innerText=content[key].text;
+
+document.getElementById("modal").classList.add("active");
+
+}
+
+function closeModal(){
+document.getElementById("modal").classList.remove("active");
+}
+
+function scrollToSection(id){
+document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+
+function openFaucet(){
+window.open("https://docs.shelby.xyz/apis/faucet/shelbyusd","_blank");
+}
+
+</script>
+
+</body>
+</html>
