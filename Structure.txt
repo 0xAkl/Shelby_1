@@ -1,0 +1,12 @@
+Project Structure
+
+shelby-protocol-explorer/
+├── index.html              ← main explorer page
+├── README.md               ← project description for GitHub
+├── assets/
+│   ├── css/
+│   │   └── style.css       ← extracted stylesheet
+│   └── js/
+│       └── main.js         ← extracted scripts
+└── docs/
+    └── faucet.md           ← additional documentation
