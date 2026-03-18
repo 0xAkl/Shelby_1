@@ -1,16 +1,3 @@
-Project Structure
-
-shelby-protocol-explorer/
-├── index.html              ← main explorer page
-├── README.md               ← project description for GitHub
-├── assets/
-│   ├── css/
-│   │   └── style.css       ← extracted stylesheet
-│   └── js/
-│       └── main.js         ← extracted scripts
-└── docs/
-    └── faucet.md           ← additional documentation
-
     # Shelby Protocol Explorer
 
 Decentralized hot storage infrastructure for high performance data access,
